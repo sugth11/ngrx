@@ -1,0 +1,47 @@
+<div class="row">
+  <div class="col-md-8">
+    <h3>Employee Lists</h3>
+    <div class="mb-3">
+      <a href="#" class="btn btn-primary" [routerLink]="['/posts/add']"
+        >To Add Employee</a
+      >
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Name</th>
+          <th>Designation</th>
+          <th>Age</th>
+          <th>Salary</th>
+          <th colspan="2">Actions</th>
+        </tr>
+      </thead>
+      <tbody *ngIf="post$ | async as posts">
+        <tr *ngFor="let post of posts">
+          <td>{{ post.id }}</td>
+          <td>{{ post.name }}</td>
+          <td>{{ post.designation }}</td>
+          <td>{{ post.age }}</td>
+          <td>{{ post.salary }}</td>
+          <td>
+            <a href="#" class="btn btn-success" [routerLink]="['edit', post.id]"
+              >Update</a
+            >
+          </td>
+          <td>
+            <button class="btn btn-danger" (click)="onDelete(post.id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="posts.length === 0">
+          No Data available
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <router-outlet></router-outlet>
+  </div>
+</div>
